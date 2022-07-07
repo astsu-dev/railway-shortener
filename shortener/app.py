@@ -1,3 +1,5 @@
+import os
+import uvicorn
 from fastapi import FastAPI
 
 from shortener.db import database
@@ -15,3 +17,7 @@ async def on_startup() -> None:
 @app.on_event("shutdown")
 async def on_shutdown() -> None:
     await database.disconnect()   
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, port=int(os.environ["PORT"]))
