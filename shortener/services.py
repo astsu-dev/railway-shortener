@@ -1,4 +1,5 @@
 import uuid
+import datetime
 import base64
 
 from sqlalchemy.sql.expression import insert, select
@@ -27,7 +28,7 @@ class URLShortenerService:
 
         url_hash = self.generate_url_hash()
         async with database.connection() as connection:
-            query = insert(tables.urls).values(url=url, url_hash=url_hash)
+            query = insert(tables.urls).values(url=url, url_hash=url_hash, created_at=datetime.datetime.now())
             await connection.execute(query)
         return url_hash
 
