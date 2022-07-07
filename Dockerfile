@@ -7,6 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY shortener ./shortener
 
-EXPOSE 8000
+EXPOSE 80
 
-CMD ["uvicorn", "shortener.app:app"]
+CMD ["uvicorn", "--port", "80", "shortener.app:app"]
